@@ -17,10 +17,12 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+# Restore Nuget Dependencies
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
+# Build project
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -28,7 +30,21 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+# Run Tests
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+# Create Nuget package
+- task: DotNetCoreCLI@2
+  inputs: 
+    command: 'pack'
+    outputDir: '$(Build.ArtifactStagingDirectory)'
+
+# Push Nuget Package to Feed
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    searchPatternPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.Tests.nupkg'
+    feedPublish: 'Keydance'
