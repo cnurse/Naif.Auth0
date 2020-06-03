@@ -3,12 +3,20 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Naif.Auth0.Controllers
 {
     [Route("Account")]
     public class AccountController : Controller
     {
+        private IConfigurationRoot _configuration;
+        
+        public AccountController(IConfigurationRoot configuration)
+        {
+            _configuration = configuration;
+        }
+        
         [Route("Login")]
         public async Task Login(string returnUrl = "/")
         {
@@ -24,7 +32,7 @@ namespace Naif.Auth0.Controllers
                 // Indicate here where Auth0 should redirect the user after a logout.
                 // Note that the resulting absolute Uri must be whitelisted in the 
                 // **Allowed Logout URLs** settings for the app.
-                RedirectUri = Url.Action("Index", "Post")
+                RedirectUri = _configuration["Auth0:LogoutRedirectUrl"]
             });
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
