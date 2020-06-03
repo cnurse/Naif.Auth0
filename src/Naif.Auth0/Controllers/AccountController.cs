@@ -10,9 +10,9 @@ namespace Naif.Auth0.Controllers
     [Route("Account")]
     public class AccountController : Controller
     {
-        private IConfigurationRoot _configuration;
+        private IConfiguration _configuration;
         
-        public AccountController(IConfigurationRoot configuration)
+        public AccountController(IConfiguration configuration)
         {
             _configuration = configuration;
         }

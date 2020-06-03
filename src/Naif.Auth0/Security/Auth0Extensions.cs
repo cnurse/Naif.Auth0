@@ -13,7 +13,7 @@ namespace Naif.Auth0.Security
 {
     public static class Auth0Extensions
     {
-        public static void AddAuth0(this IServiceCollection services, IConfigurationRoot configuration)
+        public static void AddAuth0(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
