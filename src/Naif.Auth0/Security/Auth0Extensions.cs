@@ -54,10 +54,22 @@ namespace Naif.Auth0.Security
 				options.ClaimsIssuer = "Auth0";
 					
 				// Set the correct name claim type
+				var nameClaimType = configuration["Auth0:NameClaimType"];
+				if (String.IsNullOrEmpty(nameClaimType))
+				{
+					nameClaimType = "name";
+				}
+				
+				var roleClaimType = configuration["Auth0:RoleClaimType"];
+				if (String.IsNullOrEmpty(roleClaimType))
+				{
+					roleClaimType = "https://schemas.naifblog.com/roles";
+				}
+				
 				options.TokenValidationParameters = new TokenValidationParameters
 				{
-					NameClaimType = "name",
-					RoleClaimType = "https://schemas.naifblog.com/roles"
+					NameClaimType = nameClaimType,
+					RoleClaimType = roleClaimType
 				};
 		
 				options.Events = new OpenIdConnectEvents
