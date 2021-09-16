@@ -55,6 +55,7 @@ namespace Naif.Auth0.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize]
+        [Route("Claims")]
         public IActionResult Claims()
         {
             return View();
