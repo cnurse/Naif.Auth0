@@ -13,16 +13,24 @@ namespace Naif.Auth0.Security
 {
     public static class Auth0Extensions
     {
+	    private static void CheckSameSite(CookieOptions options)
+	    {
+		    if (options.SameSite == SameSiteMode.None && options.Secure == false)
+		    {
+			    options.SameSite = SameSiteMode.Unspecified;
+		    }
+	    }
+	    
         public static void AddAuth0(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+	        services.Configure<CookiePolicyOptions>(options =>
+	        {
+		        options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+		        options.OnAppendCookie = cookieContext => CheckSameSite(cookieContext.CookieOptions);
+		        options.OnDeleteCookie = cookieContext => CheckSameSite(cookieContext.CookieOptions);
+	        });
 
-			// Add authentication services
+            // Add authentication services
 			services.AddAuthentication(options => {
 				options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
