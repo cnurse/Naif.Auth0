@@ -21,7 +21,5 @@
     <files>
         <file src="bin\Release\net5.0\Naif.Auth0.dll" target="lib\net5.0" />
         <file src="bin\Release\net5.0\Naif.Auth0.pdb" target="lib\net5.0" />
-        <file src="bin\Release\net5.0\Naif.Auth0.Views.dll" target="lib\net5.0" />
-        <file src="bin\Release\net5.0\Naif.Auth0.Views.pdb" target="lib\net5.0" />
     </files>
 </package>

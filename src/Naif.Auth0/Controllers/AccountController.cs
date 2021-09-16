@@ -36,29 +36,5 @@ namespace Naif.Auth0.Controllers
             });
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
-        
-        /*[Authorize]
-        public IActionResult Profile()
-        {
-            return View(new UserProfileViewModel()
-            {
-                Name = User.Identity.Name,
-                EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
-                ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
-            });
-        }*/
-
-
-        /// <summary>
-        /// This is just a helper action to enable you to easily see all claims related to a user. It helps when debugging your
-        /// application to see the in claims populated from the Auth0 ID Token
-        /// </summary>
-        /// <returns></returns>
-        [Authorize]
-        [Route("Claims")]
-        public IActionResult Claims()
-        {
-            return View();
-        }
     }
 }
