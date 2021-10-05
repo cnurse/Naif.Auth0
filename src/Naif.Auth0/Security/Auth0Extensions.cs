@@ -20,8 +20,9 @@ namespace Naif.Auth0.Security
 			    options.SameSite = SameSiteMode.Unspecified;
 		    }
 	    }
-	    
-        public static void AddAuth0(this IServiceCollection services, IConfiguration configuration)
+
+        public static void AddAuth0(this IServiceCollection services, IConfiguration configuration, 
+	        Func<RedirectContext, Task> onRedirectToIdentityProvider)
         {
 	        services.Configure<CookiePolicyOptions>(options =>
 	        {
@@ -79,9 +80,16 @@ namespace Naif.Auth0.Security
 					NameClaimType = nameClaimType,
 					RoleClaimType = roleClaimType
 				};
+
+				onRedirectToIdentityProvider ??= (context) =>
+				{
+					return Task.CompletedTask;
+				};
 		
 				options.Events = new OpenIdConnectEvents
 				{
+					OnRedirectToIdentityProvider = onRedirectToIdentityProvider,
+						
 					// handle the logout redirection 
 					OnRedirectToIdentityProviderForSignOut = (context) =>
 					{
