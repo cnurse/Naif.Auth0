@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <ProductVersion>2.1.1</ProductVersion>
-    <FileVersion>2.1.1.0</FileVersion>
+    <FileVersion>2.1.1.1</FileVersion>
     <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
     <LangVersion>latestmajor</LangVersion>
     <RepositoryUrl>https://github.com/cnurse/Naif.Auth0</RepositoryUrl>
