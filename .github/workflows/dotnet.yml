@@ -1,4 +1,4 @@
-name: .NET
+name: Build and Deploy
 
 on:
   push:
@@ -16,10 +16,16 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
+    - name: Prep packages
+      run: dotnet nuget add source --username cnurse --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/cnurse/index.json"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack src/Naif.Auth0/Naif.Auth0.csproj -c Release
+    - name: Publish to GitHub packages 
+      run: dotnet nuget push src/Naif.Auth0/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }}  --source "github"
