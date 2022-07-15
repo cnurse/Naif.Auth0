@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <ProductVersion>2.1.0</ProductVersion>
-    <FileVersion>2.1.0.8</FileVersion>
+    <ProductVersion>2.1.1</ProductVersion>
+    <FileVersion>2.1.1.0</FileVersion>
     <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
+    <LangVersion>latestmajor</LangVersion>
+    <RepositoryUrl>https://github.com/cnurse/Naif.Auth0</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,8 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 </Project>
